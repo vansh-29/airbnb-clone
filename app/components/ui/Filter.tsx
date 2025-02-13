@@ -19,18 +19,18 @@ const FilterComponent = () => {
     { name: "Heating", icon: "\u{1F321}", isSelected: false },
   ]);
 
-  const handleIncrement = (field) => {
+  const handleIncrement = (field: keyof typeof filters) => {
     setFilters((prev) => ({ ...prev, [field]: prev[field] + 1 }));
   };
 
-  const handleDecrement = (field) => {
+  const handleDecrement = (field: keyof typeof filters) => {
     setFilters((prev) => ({
       ...prev,
       [field]: prev[field] > 0 ? prev[field] - 1 : 0,
     }));
   };
 
-  const toggleAmenity = (index) => {
+  const toggleAmenity = (index: number) => {
     setAmenities((prev) =>
       prev.map((amenity, i) =>
         i === index ? { ...amenity, isSelected: !amenity.isSelected } : amenity
@@ -46,7 +46,7 @@ const FilterComponent = () => {
         {/* Rooms and Beds Section */}
         <div className="mt-4">
           <h3 className="text-xl font-semibold mb-4">Rooms and beds</h3>
-          {Object.keys(filters).map((key) => (
+          {(Object.keys(filters) as Array<keyof typeof filters>).map((key) => (
             <div key={key} className="flex justify-between items-center py-2">
               <span className="capitalize text-[16px]">{key}</span>
               <div className="flex items-center gap-2">
@@ -57,7 +57,9 @@ const FilterComponent = () => {
                 >
                   <Minus size={20} />
                 </button>
-                <span className="w-5 mx-4 text-xl text-center">{filters[key]}</span>
+                <span className="w-5 mx-4 text-xl text-center">
+                  {filters[key]}
+                </span>
                 <button
                   onClick={() => handleIncrement(key)}
                   className="p-2 border rounded-full text-gray-500"
@@ -79,7 +81,9 @@ const FilterComponent = () => {
                 key={amenity.name}
                 onClick={() => toggleAmenity(index)}
                 className={`flex items-center text-lg gap-2 border rounded-full px-4 py-2 text-gray-600 hover:border-black ${
-                  amenity.isSelected ? "border-black border-[2.5px] bg-gray-200" : ""
+                  amenity.isSelected
+                    ? "border-black border-[2.5px] bg-gray-200"
+                    : ""
                 }`}
               >
                 <span>{amenity.icon}</span>

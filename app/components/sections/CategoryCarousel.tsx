@@ -136,7 +136,7 @@ const CategoryCarousel = () => {
           className="flex items-center gap-2 left-10 text-black border px-4 py-2 rounded-lg"
         >
           <FaFilter size={18} />
-          <span className="text-sm md:text-base">Filters</span>
+          <span className="text-sm ml-3 md:text-base">Filters</span>
         </Button>
       </div>
       {/* Filter Modal */}
