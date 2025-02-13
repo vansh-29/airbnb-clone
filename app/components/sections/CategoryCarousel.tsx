@@ -139,6 +139,21 @@ const CategoryCarousel = () => {
           <span className="text-sm md:text-base">Filters</span>
         </Button>
       </div>
+      {/* Filter Modal */}
+      {isOpen && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
+          <div className="relative bg-white right-20  rounded-lg shadow-lg w-[400px]">
+            {/* Close Button */}
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute top-4 left-6 p-2 text-gray-500 hover:text-black"
+            >
+              <X size={30} />
+            </button>
+            <FilterComponent />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
